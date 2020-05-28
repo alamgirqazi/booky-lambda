@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "goodreads-api-node": "0.0.10",
     "netlify-lambda": "^1.6.3"
   }
