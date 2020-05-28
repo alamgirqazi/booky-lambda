@@ -12,8 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv-webpack": "^1.8.0",
     "goodreads-api-node": "0.0.10",
-    "netlify-lambda": "^1.6.3"
+    "jsonwebtoken": "^8.5.1",
+    "mongodb-client-encryption": "^1.0.1",
+    "mongoose": "^5.9.16",
+    "netlify-lambda": "^1.6.3",
+    "webpack-node-externals": "^1.7.2"
   }
 }
