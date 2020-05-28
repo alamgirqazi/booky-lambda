@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 // const mongoosePaginate = require("mongoose-paginate");
 const Schema = mongoose.Schema;
 
-const User = new Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
   },
@@ -28,10 +28,20 @@ const User = new Schema({
 
 // User.plugin(mongoosePaginate);
 
-User.methods.toJSON = function () {
+UserSchema.methods.toJSON = function () {
   var obj = this.toObject();
   delete obj.password;
   return obj;
 };
 
-module.exports = users = mongoose.model("User", User);
+var User;
+
+if (mongoose.models.User) {
+  User = mongoose.model("User");
+} else {
+  User = mongoose.model("User", UserSchema);
+}
+
+module.exports = User;
+
+// module.exports = users = mongoose.model("User", UserSchema);
