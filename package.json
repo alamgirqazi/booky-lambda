@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "netlify-lambda serve functions --config ./webpack.server.js",
+    "serve": "netlify-lambda serve functions --config ./webpack.config.js",
     "build": "netlify-lambda build functions"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.8.0",
     "goodreads-api-node": "0.0.10",
     "netlify-lambda": "^1.6.3"
