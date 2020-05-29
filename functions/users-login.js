@@ -13,14 +13,14 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  await mongoose.connect(mongoCon, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  });
-
   try {
+    await mongoose.connect(mongoCon, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    });
+
     const body = JSON.parse(event.body);
 
     const email = body.email;
@@ -71,5 +71,9 @@ exports.handler = async (event, context) => {
     }
   } catch (ex) {
     console.log("ex", ex);
+    return {
+      statusCode: 401,
+      body: JSON.stringify(ex),
+    };
   }
 };
