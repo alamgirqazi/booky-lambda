@@ -17,7 +17,7 @@
     "goodreads-api-node": "0.0.10",
     "jsonwebtoken": "^8.5.1",
     "mongodb-client-encryption": "^1.0.1",
-    "mongoose": "^5.4.21",
+    "mongoose": "^5.7.5",
     "netlify-lambda": "^1.6.3",
     "webpack-node-externals": "^1.7.2"
   }
