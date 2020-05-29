@@ -4,12 +4,6 @@ const mongoose = require("mongoose");
 
 const mongoCon = process.env.mongoCon;
 
-mongoose.connect(mongoCon, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: false,
-});
-
 const Users = require("./models/users.model.js");
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
@@ -18,6 +12,13 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+
+  await mongoose.connect(mongoCon, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  });
 
   try {
     const body = JSON.parse(event.body);
