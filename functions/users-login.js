@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 
 const mongoCon = process.env.mongoCon;
 
-const Users = require("./models/users.model.js");
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
@@ -20,6 +19,8 @@ exports.handler = async (event, context) => {
       useCreateIndex: true,
       useFindAndModify: false,
     });
+
+    const Users = require("./models/users.model.js");
 
     const body = JSON.parse(event.body);
 
