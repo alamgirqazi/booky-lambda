@@ -7,7 +7,7 @@ const mongoCon = process.env.mongoCon;
 mongoose.connect(mongoCon, {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: false,
 });
 
 const Users = require("./models/users.model.js");
