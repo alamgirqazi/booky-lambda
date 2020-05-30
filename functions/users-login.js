@@ -1,6 +1,11 @@
 // added default because otherwise It wouldn't work
 // connection to mongoose
 const mongoose = require("mongoose");
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+};
 
 const mongoCon = process.env.mongoCon;
 
@@ -35,9 +40,7 @@ exports.handler = async (event, context) => {
       const error = "This user doesnot exists. Please signup first";
       return {
         statusCode: 401,
-        headers: {
-          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-        },
+        headers,
         body: JSON.stringify(error),
       };
     } else {
@@ -61,9 +64,7 @@ exports.handler = async (event, context) => {
         // res.send({ message: "Successfully Logged in", token: token });
         return {
           statusCode: 200,
-          headers: {
-            "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-          },
+          headers,
           body: JSON.stringify(token),
         };
       } else {
@@ -73,9 +74,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 401,
-          headers: {
-            "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-          },
+          headers,
           body: "password doesnot match",
         };
       }
@@ -84,9 +83,7 @@ exports.handler = async (event, context) => {
     console.log("ex", ex);
     return {
       statusCode: 401,
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-      },
+      headers,
       body: JSON.stringify(ex),
     };
   }
