@@ -12,7 +12,6 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
 
-  console.log("try");
   try {
     await mongoose.connect(mongoCon, {
       useNewUrlParser: true,
@@ -21,7 +20,6 @@ exports.handler = async (event, context) => {
       useFindAndModify: false,
     });
 
-    console.log("2");
     const Users = require("./models/users.model.js");
 
     const body = JSON.parse(event.body);
@@ -38,7 +36,6 @@ exports.handler = async (event, context) => {
         statusCode: 401,
         headers: {
           "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-          "Access-Control-Allow-Credentials": true, // Required for cookies, authorization headers with HTTPS
         },
         body: JSON.stringify(error),
       };
@@ -63,6 +60,9 @@ exports.handler = async (event, context) => {
         // res.send({ message: "Successfully Logged in", token: token });
         return {
           statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+          },
           body: JSON.stringify("response"),
         };
       } else {
@@ -72,6 +72,9 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 401,
+          headers: {
+            "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+          },
           body: JSON.stringify("response"),
         };
       }
@@ -80,6 +83,9 @@ exports.handler = async (event, context) => {
     console.log("ex", ex);
     return {
       statusCode: 401,
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      },
       body: JSON.stringify(ex),
     };
   }
