@@ -13,7 +13,8 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    await mongoose.connect(mongoCon, {
+    console.log("mongocon", mongoCon);
+    mongoose.connect(mongoCon, {
       useNewUrlParser: true,
       // useUnifiedTopology: true,
       useCreateIndex: true,
@@ -63,7 +64,7 @@ exports.handler = async (event, context) => {
           headers: {
             "Access-Control-Allow-Origin": "*", // Required for CORS support to work
           },
-          body: JSON.stringify("response"),
+          body: JSON.stringify(token),
         };
       } else {
         console.log("password doesnot match");
@@ -75,7 +76,7 @@ exports.handler = async (event, context) => {
           headers: {
             "Access-Control-Allow-Origin": "*", // Required for CORS support to work
           },
-          body: JSON.stringify("response"),
+          body: "password doesnot match",
         };
       }
     }
