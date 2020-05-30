@@ -20,9 +20,14 @@ exports.handler = async (event, context) => {
   }
   if (event.httpMethod === "OPTIONS") {
     console.log("optionesssss");
+    let testHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+    };
     return {
       statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-      headers,
+      headers: testHeaders,
       body: "This was a preflight call!",
     };
   }
