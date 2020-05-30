@@ -1,4 +1,3 @@
-// added default because otherwise It wouldn't work
 // connection to mongoose
 const mongoose = require("mongoose");
 const headers = {
@@ -6,11 +5,6 @@ const headers = {
   "Access-Control-Allow-Methods": "POST,GET,PUT,OPTIONS",
   "Access-Control-Allow-Headers":
     "Origin, X-Requested-With, Content-Type, Accept",
-  // "Access-Control-Allow-Origin": "*",
-  // "Access-Control-Allow-Headers": "Content-Type",
-  // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-  // "Access-Control-Allow-Headers":
-  //   "Origin, X-Requested-With, Content-Type, Accept",
 };
 
 const mongoCon = process.env.mongoCon;
@@ -20,7 +14,7 @@ const jsonwebtoken = require("jsonwebtoken");
 
 exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
   }
 
   try {
@@ -46,7 +40,7 @@ exports.handler = async (event, context) => {
       const error = "This user doesnot exists. Please signup first";
       return {
         statusCode: 401,
-        headers,
+        headers: headers,
         body: JSON.stringify(error),
       };
     } else {
@@ -70,7 +64,7 @@ exports.handler = async (event, context) => {
         // res.send({ message: "Successfully Logged in", token: token });
         return {
           statusCode: 200,
-          headers,
+          headers: headers,
           body: JSON.stringify(token),
         };
       } else {
@@ -80,7 +74,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 401,
-          headers,
+          headers: headers,
           body: "password doesnot match",
         };
       }
@@ -89,7 +83,7 @@ exports.handler = async (event, context) => {
     console.log("ex", ex);
     return {
       statusCode: 401,
-      headers,
+      headers: headers,
       body: JSON.stringify(ex),
     };
   }
