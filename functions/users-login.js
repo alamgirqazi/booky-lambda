@@ -13,23 +13,16 @@ const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
 exports.handler = async (event, context) => {
-  console.log("123123http method", event.httpMethod);
-
-  // if (event.httpMethod !== "POST") {
-  //   return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
-  // }
   if (event.httpMethod === "OPTIONS") {
-    console.log("optionesssss");
-    let testHeaders = {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers":
-        "Origin, X-Requested-With, Content-Type, Accept",
-    };
     return {
       statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
-      headers: testHeaders,
+      headers: headers,
       body: "This was a preflight call!",
     };
+  }
+
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
   }
 
   try {
