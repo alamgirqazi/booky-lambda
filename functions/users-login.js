@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const headers = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "POST,GET,PUT,OPTIONS",
+  "Access-Control-Allow-Headers":
+    "Origin, X-Requested-With, Content-Type, Accept",
   // "Access-Control-Allow-Origin": "*",
   // "Access-Control-Allow-Headers": "Content-Type",
   // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
