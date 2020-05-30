@@ -16,6 +16,14 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
   }
+  if (event.httpMethod === "OPTIONS") {
+    console.log("optionesssss");
+    return {
+      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+      headers,
+      body: "This was a preflight call!",
+    };
+  }
 
   try {
     console.log("mongocon", mongoCon);
