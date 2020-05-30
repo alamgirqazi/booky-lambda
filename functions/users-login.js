@@ -13,11 +13,11 @@ const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
 exports.handler = async (event, context) => {
-  console.log("http method", event.httpMethod);
+  console.log("123123http method", event.httpMethod);
 
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
-  }
+  // if (event.httpMethod !== "POST") {
+  //   return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
+  // }
   if (event.httpMethod === "OPTIONS") {
     console.log("optionesssss");
     let testHeaders = {
