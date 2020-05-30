@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
   try {
     await mongoose.connect(mongoCon, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useUnifiedTopology: true,
       useCreateIndex: true,
       useFindAndModify: false,
     });
