@@ -2,8 +2,10 @@ export async function handler(event, context) {
   return {
     statusCode: 200,
     headers: {
-      "content-type": "application/json",
-      "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST,GET,PUT,OPTIONS",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
     },
     body: JSON.stringify({
       message: `Hello world ${Math.floor(Math.random() * 10)}`,
