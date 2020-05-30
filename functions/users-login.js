@@ -6,7 +6,7 @@ const headers = {
   "Access-Control-Allow-Headers":
     "Content-Type,X-Amz-Date,Authorization,X-Api-Key,x-requested-with",
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST,GET,OPTIONS",
+  "Access-Control-Allow-Methods": "POST,GET,PUT, OPTIONS",
   // "Access-Control-Allow-Origin": "*",
   // "Access-Control-Allow-Headers": "Content-Type",
   // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
