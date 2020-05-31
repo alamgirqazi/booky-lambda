@@ -23,6 +23,9 @@ const UserBookSchema = new Schema({
   small_image_url: {
     type: String,
   },
+  reading_status: {
+    type: String,
+  },
   published: {
     type: Object,
   },
@@ -44,9 +47,9 @@ const UserBookSchema = new Schema({
 var UserBook;
 
 if (mongoose.models.UserBook) {
-  User = mongoose.model("UserBook");
+  UserBook = mongoose.model("UserBook");
 } else {
-  User = mongoose.model("UserBook", UserBookSchema);
+  UserBook = mongoose.model("UserBook", UserBookSchema);
 }
 
 module.exports = UserBook;
