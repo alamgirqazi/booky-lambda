@@ -10,7 +10,6 @@ const headers = {
 const mongoCon = process.env.mongoCon;
 
 exports.handler = async (event, context) => {
-  console.log("nicee");
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
@@ -43,7 +42,6 @@ exports.handler = async (event, context) => {
       user_id: user_id,
       goodreads_id: goodreads_id,
     });
-    console.log(result);
 
     if (!result) {
       const userBook = new UserBook(body);
@@ -63,7 +61,6 @@ exports.handler = async (event, context) => {
         reading_status: body.reading_status,
       };
       // this means the book already exist so just update
-      console.log("iska kuch krte");
       const result = await UserBook.updateOne(
         {
           user_id: user_id,

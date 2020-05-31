@@ -3,6 +3,7 @@
 const mongoose = require("mongoose");
 
 const mongoCon = process.env.mongoCon;
+const jsonwebtoken = require("jsonwebtoken");
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -49,7 +50,17 @@ exports.handler = async (event, context) => {
     const user = new Users(body);
 
     const result = await user.save();
+
+    const token = jsonwebtoken.sign(
+      {
+        data: result,
+        role: "User",
+      },
+      process.env.JWT_KEY,
+      { expiresIn: "7d" }
+    );
     const response = {
+      token: token,
       message: "Signup successful",
       code: 200,
     };
