@@ -26,7 +26,6 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log("mongocon", mongoCon);
     mongoose.connect(mongoCon, {
       useNewUrlParser: true,
       // useUnifiedTopology: true,
@@ -45,11 +44,15 @@ exports.handler = async (event, context) => {
     const result = await Users.findOne({ email: email });
     if (!result) {
       // this means result is null
-      const error = "This user doesnot exists. Please signup first";
+      const response = {
+        message: "This user doesnot exists. Please signup first",
+        code: 401,
+      };
+
       return {
         statusCode: 401,
         headers: headers,
-        body: JSON.stringify(error),
+        body: JSON.stringify(response),
       };
     } else {
       // email did exist
@@ -69,26 +72,29 @@ exports.handler = async (event, context) => {
           { expiresIn: "7d" }
         );
 
-        // res.send({ message: "Successfully Logged in", token: token });
+        const response = {
+          token: token,
+          message: "Success",
+          code: 200,
+        };
         return {
           statusCode: 200,
           headers: headers,
-          body: JSON.stringify(token),
+          body: JSON.stringify(response),
         };
       } else {
-        console.log("password doesnot match");
-
-        // res.status(401).send({ message: "Wrong email or Password" });
-
+        const response = {
+          message: "Email or Password do not match",
+          code: 401,
+        };
         return {
           statusCode: 401,
           headers: headers,
-          body: "password doesnot match",
+          body: JSON.stringify(response),
         };
       }
     }
   } catch (ex) {
-    console.log("ex", ex);
     return {
       statusCode: 401,
       headers: headers,

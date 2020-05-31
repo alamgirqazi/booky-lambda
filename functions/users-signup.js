@@ -11,9 +11,6 @@ const headers = {
     "Origin, X-Requested-With, Content-Type, Accept",
 };
 
-const Users = require("./models/users.model.js");
-const bcrypt = require("bcryptjs");
-
 exports.handler = async (event, context) => {
   if (event.httpMethod === "OPTIONS") {
     return {
@@ -26,6 +23,9 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers: headers, body: "Method Not Allowed" };
   }
+
+  const Users = require("./models/users.model.js");
+  const bcrypt = require("bcryptjs");
 
   try {
     mongoose.connect(mongoCon, {
@@ -49,20 +49,27 @@ exports.handler = async (event, context) => {
     const user = new Users(body);
 
     const result = await user.save();
-    const message = "Signup successful";
+    const response = {
+      message: "Signup successful",
+      code: 200,
+    };
     return {
       statusCode: 200,
       headers: headers,
-      body: JSON.stringify(message),
+      body: JSON.stringify(response),
     };
   } catch (ex) {
     console.log("ex", ex);
     if (ex.code === 11000) {
-      const error = "This email has been registered already";
+      const response = {
+        message: "This email has been registered already",
+        code: 500,
+      };
+
       return {
         statusCode: 500,
         headers: headers,
-        body: JSON.stringify(error),
+        body: JSON.stringify(response),
       };
     } else {
       return {
