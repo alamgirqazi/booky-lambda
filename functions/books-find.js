@@ -9,6 +9,13 @@ const credentials = {
   key: goodreadsKey,
   secret: goodreadsSecret,
 };
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST,GET,PUT,OPTIONS",
+  "Access-Control-Allow-Headers":
+    "Origin, X-Requested-With, Content-Type, Accept",
+};
+
 exports.handler = async (event, context) => {
   const query = event.queryStringParameters.query || "world";
 
@@ -33,12 +40,14 @@ exports.handler = async (event, context) => {
     });
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify(response.search),
     };
   } catch (error) {
     console.log("err", error);
     return {
       statusCode: 500,
+      headers,
       body: error,
     };
   }
