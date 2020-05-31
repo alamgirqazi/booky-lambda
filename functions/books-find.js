@@ -1,6 +1,6 @@
 // added default because otherwise It wouldn't work
 
-const goodreads = require("goodreads-api-node").default;
+const goodreads = require("goodreads-api-node");
 
 const goodreadsKey = process.env.goodreadsKey;
 const goodreadsSecret = process.env.goodreadsSecret;
@@ -11,6 +11,15 @@ const credentials = {
 };
 exports.handler = async (event, context) => {
   const query = event.queryStringParameters.query || "world";
+
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200, // <-- Must be 200 otherwise pre-flight call fails
+      headers: headers,
+      body: "This was a preflight call!",
+    };
+  }
+
   if (event.httpMethod !== "GET") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
