@@ -26,10 +26,15 @@ const UserBookSchema = new Schema({
   reading_status: {
     type: String,
   },
+  reading_finish_date: {
+    type: Date,
+  },
   published: {
     type: Object,
   },
-
+  timeline: {
+    type: [{}],
+  },
   is_deleted: {
     type: Boolean,
     default: false,

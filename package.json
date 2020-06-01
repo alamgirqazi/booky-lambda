@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "netlify-lambda serve functions --config ./webpack.config.js",
     "serve": "netlify-lambda serve functions --config ./webpack.config.js",
     "build": "netlify-lambda build functions "
   },

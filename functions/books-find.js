@@ -1,6 +1,12 @@
 // added default because otherwise It wouldn't work
 
-const goodreads = require("goodreads-api-node").default;
+let goodreads;
+
+if (process.env.ENV === "dev") {
+  goodreads = require("goodreads-api-node");
+} else {
+  goodreads = require("goodreads-api-node").default;
+}
 
 const goodreadsKey = process.env.goodreadsKey;
 const goodreadsSecret = process.env.goodreadsSecret;
