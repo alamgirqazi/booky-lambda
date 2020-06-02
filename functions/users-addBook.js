@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
       user_id: user_id,
       goodreads_id: goodreads_id,
     });
-
+    const timeline = result["timeline"];
     let finalDate = null;
     if (body.reading_status === "read") {
       finalDate = body.reading_finish_date;
@@ -55,7 +55,6 @@ exports.handler = async (event, context) => {
       };
       body.timeline = [];
       body.timeline.push(timeline);
-      console.log("bosy", body);
       const userBook = new UserBook(body);
       const saved = await userBook.save();
       const response = {
@@ -69,18 +68,18 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(response),
       };
     } else {
-      const updates = {
-        reading_status: body.reading_status,
-      };
-
       const timelineObj = {
         status: body.reading_status,
         date: finalDate,
       };
+      timeline.push(timelineObj);
+      const updates = {
+        reading_status: body.reading_status,
+        timeline,
+      };
 
-      console.log("timelineObj", timelineObj);
       // this means the book already exist so just update
-      const result = await UserBook.updateOne(
+      const finalresult = await UserBook.updateOne(
         {
           user_id: user_id,
           goodreads_id: goodreads_id,

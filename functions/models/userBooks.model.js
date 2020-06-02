@@ -33,7 +33,7 @@ const UserBookSchema = new Schema({
     type: Object,
   },
   timeline: {
-    type: [{}],
+    type: [],
   },
   is_deleted: {
     type: Boolean,
