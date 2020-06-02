@@ -42,7 +42,6 @@ exports.handler = async (event, context) => {
       user_id: user_id,
       goodreads_id: goodreads_id,
     });
-    const timeline = result["timeline"];
     let finalDate = null;
     if (body.reading_status === "read") {
       finalDate = body.reading_finish_date;
@@ -68,6 +67,8 @@ exports.handler = async (event, context) => {
         body: JSON.stringify(response),
       };
     } else {
+      const timeline = result["timeline"];
+
       const timelineObj = {
         status: body.reading_status,
         date: finalDate,
