@@ -16,7 +16,7 @@
     "bcryptjs": "^2.4.3",
     "dotenv-webpack": "^1.8.0",
     "goodreads-api-node": "0.0.10",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongodb-client-encryption": "^1.0.1",
     "mongoose": "^5.4.21",
     "netlify-lambda": "^1.6.3",
